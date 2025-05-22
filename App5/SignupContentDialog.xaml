@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog x:Class="App5.SignupContentDialog"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               Title="注册"
+               PrimaryButtonText="注册"
+               CloseButtonText="取消"
+               CornerRadius="8"
+               PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+               CloseButtonClick="ContentDialog_CloseButtonClick">
+
+    <StackPanel Orientation="Vertical" Spacing="10">
+        <TextBox x:Name="RegisterUsernameTextBox"
+                 PlaceholderText="请输入用户名"
+                 Width="300"
+                 HorizontalAlignment="Center"/>
+
+        <PasswordBox x:Name="RegisterPasswordBox"
+                     PlaceholderText="请输入密码"
+                     Width="300"
+                     HorizontalAlignment="Center"/>
+
+        <PasswordBox x:Name="RegisterConfirmPasswordBox"
+                     PlaceholderText="请再次输入密码"
+                     Width="300"
+                     HorizontalAlignment="Center"/>
+    </StackPanel>
+</ContentDialog>

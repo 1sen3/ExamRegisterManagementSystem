@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="App5.Pages.AdminManage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App5.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:community="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:controls="using:CommunityToolkit.WinUI.Controls"
+    xmlns:ic="using:FluentIcons.WinUI"
+    xmlns:ui="using:CommunityToolkit.WinUI"
+    mc:Ignorable="d">
+
+    <Grid>
+        <!-- 顶部区域：Pivot 标题和按钮 -->
+        <StackPanel VerticalAlignment="Top" Background="Transparent" Padding="24 12 24 0" Orientation="Horizontal">
+            <controls:Segmented x:Name="MainSegmented" SelectionChanged="MainSegmented_SelectionChanged">
+                <controls:SegmentedItem Content="考试管理"
+                                        Icon="{ui:FontIcon Glyph=&#xE82D;}"/>
+                <controls:SegmentedItem Content="考生管理"
+                                        Icon="{ui:FontIcon Glyph=&#xE7BE;}"/>
+            </controls:Segmented>
+            <!-- 按钮区域 -->
+            <StackPanel Orientation="Horizontal" 
+                        Spacing="20"
+                        Margin="36 16 12 12">
+                <Button x:Name="AddButton" 
+                        Click="AddButton_Click">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <FontIcon Glyph="&#xED11;"
+                                  FontSize="14"/>
+                        <TextBlock Text="添加"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="DeleteButton"
+                        Click="DeleteButton_Click">
+                    <StackPanel Orientation="Horizontal" Spacing="12">
+                        <FontIcon Glyph="&#xE74D;"
+                                  FontSize="14"/>
+                        <TextBlock Text="删除"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+        <!-- 内容区域：滚动的内容 -->
+        <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                      HorizontalScrollBarVisibility="Disabled"
+                      Margin="0 80 0 0"
+                      Padding="36 0 36 0">
+            <!-- 调整 Margin 以确保内容区域不与顶部区域重叠 -->
+            <Grid>
+                <!-- 考试管理内容 -->
+                <StackPanel x:Name="ExamContent" Spacing="16" Visibility="Visible">
+                    <ListView x:Name="ExamDataGrid"
+                              SelectionMode="Single"
+                              HorizontalAlignment="Stretch">
+                        <ListView.Header>
+                            <Grid Padding="16,12"
+                                  ColumnSpacing="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Text="考试号" 
+                                           FontWeight="Bold"/>
+                                <TextBlock Grid.Column="1"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Text="科目" 
+                                           FontWeight="Bold"/>
+                                <TextBlock Grid.Column="2"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Text="日期" 
+                                           FontWeight="Bold"/>
+                                <TextBlock Grid.Column="3"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Text="开始时间" 
+                                           FontWeight="Bold"/>
+                                <TextBlock Grid.Column="4"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Text="结束时间" 
+                                           FontWeight="Bold"/>
+                                <TextBlock Grid.Column="5"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Text="考场"
+                                           FontWeight="Bold"/>
+                            </Grid>
+                        </ListView.Header>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnSpacing="16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding id}"/>
+                                    <TextBlock Text="{Binding name}" 
+                                       Grid.Column="1"/>
+                                    <TextBlock Text="{Binding date}"
+                                       Grid.Column="2"/>
+                                    <TextBlock Text="{Binding timestart}" 
+                                       Grid.Column="3"/>
+                                    <TextBlock Text="{Binding timeend}" 
+                                       Grid.Column="4"/>
+                                    <TextBlock Text="{Binding room}" 
+                                       Grid.Column="5"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle>
+                            <Style BasedOn="{StaticResource DefaultListViewItemStyle}"
+                           TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" 
+                                Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                    <!-- 如果没有考试 -->
+                    <TextBlock x:Name="NoExamsText"
+                               Text="您当前没有报名考试"
+                               FontSize="16"
+                               HorizontalAlignment="Center"
+                               Visibility="Collapsed"/>
+                </StackPanel>
+
+                <!-- 考生管理内容 -->
+                <StackPanel x:Name="StudentContent" Spacing="16" Visibility="Collapsed">
+                    <ListView x:Name="StudentDataGrid"
+                              SelectionMode="Single"
+                              HorizontalAlignment="Stretch">
+                        <ListView.Header>
+                            <Grid Padding="16,12"
+                                  ColumnSpacing="16">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Text="考生号" 
+                                           FontWeight="Bold"/>
+                                <TextBlock Grid.Column="1"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Text="名称" 
+                                           FontWeight="Bold"/>
+                                <TextBlock Grid.Column="2"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Text="性别" 
+                                           FontWeight="Bold"/>
+                                <TextBlock Grid.Column="3"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Text="出生日期" 
+                                           FontWeight="Bold"/>
+                                <TextBlock Grid.Column="4"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Text="身份证号" 
+                                           FontWeight="Bold"/>
+                                <TextBlock Grid.Column="5"
+                                           Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                                           Text="手机号"
+                                           FontWeight="Bold"/>
+                            </Grid>
+                        </ListView.Header>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnSpacing="16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding id}"/>
+                                    <TextBlock Text="{Binding Name}" 
+                                       Grid.Column="1"/>
+                                    <TextBlock Text="{Binding Gender}"
+                                       Grid.Column="2"/>
+                                    <TextBlock Text="{Binding BirthDate}" 
+                                       Grid.Column="3"/>
+                                    <TextBlock Text="{Binding ID_number}" 
+                                       Grid.Column="4"/>
+                                    <TextBlock Text="{Binding Phone}" 
+                                       Grid.Column="5"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle>
+                            <Style BasedOn="{StaticResource DefaultListViewItemStyle}"
+                           TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" 
+                                Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                    <!-- 如果没有考生 -->
+                    <TextBlock x:Name="NoStudentText"
+                               Text="系统当前没有学生"
+                               FontSize="16"
+                               HorizontalAlignment="Center"
+                               Visibility="Collapsed"/>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

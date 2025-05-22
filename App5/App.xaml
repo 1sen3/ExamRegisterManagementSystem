@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application
+    x:Class="App5.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App5">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- 默认主题资源 -->
+            <ResourceDictionary.ThemeDictionaries>
+                <!-- 浅色模式 -->
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="BackgroundBrush" Color="White"/>
+                    <SolidColorBrush x:Key="ForegroundBrush" Color="Black"/>
+                </ResourceDictionary>
+                <!-- 深色模式 -->
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="BackgroundBrush" Color="Black"/>
+                    <SolidColorBrush x:Key="ForegroundBrush" Color="White"/>
+                </ResourceDictionary>
+                <!-- Mica -->
+                <ResourceDictionary x:Key="Mica">
+                    <SolidColorBrush x:Key="BacgroundEffectBrush" Color="Transparent"/>
+                </ResourceDictionary>
+                <!-- MicaAlt -->
+                <ResourceDictionary x:Key="MicaAlt">
+                    <SolidColorBrush x:Key="BacgroundEffectBrush" Color="Transparent"/>
+                </ResourceDictionary>
+                <!-- Acrylic -->
+                <ResourceDictionary x:Key="Acrylic">
+                    <SolidColorBrush x:Key="BacgroundEffectBrush" Color="Transparent"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <!-- Other merged dictionaries here -->
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Other app resources here -->
+            <Thickness x:Key="NavigationViewContentMargin">0,48,0,0</Thickness>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
