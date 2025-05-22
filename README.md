@@ -8,5 +8,6 @@
 ### 管理员端
 ![管理](https://github.com/user-attachments/assets/d0b634a7-838b-44cd-bcbd-1bfe90c0fd9f)
 ## 鸣谢
-<p>[WinUICommunity](https://github.com/WinUICommunity/WinUICommunity)</p>
-<p>[FluentIcons](https://github.com/davidxuang/FluentIcons)</p>
+[WinUICommunity](https://github.com/WinUICommunity/WinUICommunity)
+
+[FluentIcons](https://github.com/davidxuang/FluentIcons)
